@@ -2,29 +2,24 @@ body {
     margin: 0;
     padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    min-width: 400px;
+    min-width: 300px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #5f9341;
-    margin-bottom: 4px;
-}
-
-button {
-    background: #5f9341;
+button{
+    background-color: #111111;
+    border: none;
+    font-size: 14px;
     color: white;
-    padding: 10px 20px;
-    border: 1px solid #5f9341;
-    font-weight: bold;
-}
+    padding: 0.8em 1.2em;
+    cursor:pointer;
+  }
+  
+  button:hover {
+    background-color: #3A3A3A;
+  }
+  
+ 
 
-#delete-btn {
-    background: white;
-    color: #5f9341;
-}
 
 ul {
     margin-top: 20px;
