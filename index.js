@@ -1,39 +1,42 @@
-let myLeads = []
-const ulEl = document.getElementById("ul-el")
-
-const deleteBtn = document.getElementById("delete-btn")
-const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
-const tabBtn = document.getElementById("tab-btn")
-
-if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage
-    render(myLeads)
+async function addItem(link, tag) {
+    fetch("https://notion-save-url.herokuapp.com/add-url", {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        mode: "cors",
+        body: JSON.stringify({link, tag})
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+        return data
+    }). catch ((error) => {
+        console.log(error)
+        return false
+  })
 }
+
+// notion script ends
+
+const saved = document.getElementById("saved")
+
+const resourceBtn = document.getElementById("resource-btn")
+const tabBtn = document.getElementById("tab-btn")
 
 tabBtn.addEventListener("click", function(){    
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        myLeads.push({url: tabs[0].url, title: tabs[0].title})
-        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-        render(myLeads)
+        const response = addItem(tabs[0].url, "job")
+        render(response)
     })
 })
-
-function render(leads) {
-    let listItems = ""
-    for (let i = 0; i < leads.length; i++) {
-        listItems += `
-            <li>
-                <a target='_blank' href='${leads[i].url}'>
-                    ${leads[i].title}
-                </a>
-            </li>
-        `
-    }
-    ulEl.innerHTML = listItems
-}
-
-deleteBtn.addEventListener("dblclick", function() {
-    localStorage.clear()
-    myLeads = []
-    render(myLeads)
+resourceBtn.addEventListener("click", function(){    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        const response = addItem(tabs[0].url, "resource")
+        render(response)
+    })   
 })
+
+function render(response) {
+    saved.innerHTML = response?"Saved!":"Failed to save!"
+}
