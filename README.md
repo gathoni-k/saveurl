@@ -7,7 +7,9 @@ A chrome extension that uses the Chrome API to save the current url to Notion.
 
 ## How to Use
 Clone this repo and deploy it to chrome through 
-[Chrome extensions developer dashboard](chrome://extensions/).
+[Chrome extensions developer dashboard](chrome://extensions/) 
+
+Here is a [loom showing how to upload it as an extension to Chrome](https://www.loom.com/share/bc53ee29bb5046798c86a488949d0ee0).
 
 Click the save job to **SAVE URL** with a job tag and **SAVE RESOURCE** to save url with a resources tag.
 
